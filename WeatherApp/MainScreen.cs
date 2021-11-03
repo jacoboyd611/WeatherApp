@@ -19,12 +19,14 @@ namespace WeatherApp
         public MainScreen()
         {
             InitializeComponent();
+            //list of the picture boxes for displaying the icons
             icons = new PictureBox[] {day1Box, day2Box, day3Box, day4Box, day5Box, day6Box, day7Box};
 
             Background();
             Setup();
             Refresh();
         }
+        //display all relevent information; current data, forecast data, icons, location label
         private void Setup()
         {
             currentOutput.Text = $"{Form1.days[0].currentTemp}°C";
@@ -43,7 +45,7 @@ namespace WeatherApp
                 else { daysOutput.Text += Convert.ToDateTime(Form1.days[i].date).ToString("dddd") + "\n"; }
             }
         }
-
+        //change the background based on weather 
         private void Background()
         {
             decimal code = Form1.days[0].code;
@@ -53,14 +55,14 @@ namespace WeatherApp
             else if (800 == code) { this.BackgroundImage = Properties.Resources.clearSky; }
             else if (800 < code) { this.BackgroundImage = Properties.Resources.cloudySky; }
         }
-
+        //clear labels
         private void Clear()
         {
             maxOutput.Text = "";
             minOutput.Text = "";
             daysOutput.Text = "";
         }
-
+        //paint some graphics
         private void MainScreen_Paint(object sender, PaintEventArgs e)
         {
             //Allows me to use the designer to draw the background by using the label's coordinates 
@@ -77,7 +79,7 @@ namespace WeatherApp
             e.Graphics.DrawRectangle(blackpen, secondTopLabel.Location.X, secondTopLabel.Location.Y,
                 secondTopLabel.Size.Width, secondTopLabel.Size.Height);
         }
-
+        //change location and display the new information
         private void button1_Click(object sender, EventArgs e)
         {
             string lastInput = Form1.city;
