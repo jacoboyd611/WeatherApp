@@ -86,16 +86,14 @@ namespace WeatherApp
             Form1.city = textBox1.Text;
             Form1.days.Clear();
 
-            while (!Form1.ExtractForecast()) 
-            { 
-                Form1.city = lastInput;
-                textBox1.Text = "Error";
+            if (Form1.ExtractForecast()) 
+            {
+                Form1.ExtractCurrent();
+                Background();
+                Setup();
+                Refresh();
             }
-            Form1.ExtractCurrent();
-
-            Background();
-            Setup();
-            Refresh();
+            else { textBox1.Text = "Error"; }
         }
     }
 }
